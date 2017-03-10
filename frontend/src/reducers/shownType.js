@@ -6,5 +6,8 @@ export const shownType = (state = shownTypes.NOT_COMPLETED, action) => {
         case types.CHANGE_SHOWN_TYPE: {
             return action.payload.shownType;
         }
+        default: {
+            return state;
+        }
     }
 };
