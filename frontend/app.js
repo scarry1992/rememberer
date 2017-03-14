@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import shownTypes from './src/constants/ShownTypes';
 import  { createStore } from 'redux';
 import { reducer } from './src/reducers'
-import actions from './src/actions'
-
+import { MemosListApp } from './src/containers/MemosListApp'
+import { Provider } from 'react-redux'
+//import ShownTypeActions from './src/actions/shownTypeActions'
 
 const initialState = {
     shownType: shownTypes.NOT_COMPLETED,
@@ -25,29 +26,32 @@ const initialState = {
     }
 };
 
-
-// class App extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 Hello, App!
-//             </div>
-//         );
-//     }
-// }
-//
-// ReactDOM.render(<App/>, document.getElementById('root'))
-
 const store = createStore(
     reducer,
     initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-store.dispatch(actions.addMemo('Hello App'));
+//store.dispatch(ShownTypeActions.changeShownType(shownTypes.COMPLETED));
 
-store.dispatch(actions.editMemo(1, 'Editted'));
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <Provider store={store}>
+                    <MemosListApp/>
+                </Provider>
+            </div>
+        );
+    }
+}
 
-store.dispatch(actions.deleteMemo(2));
 
-store.dispatch(actions.changeShownType(shownTypes.COMPLETED));
+ReactDOM.render(<App/>, document.getElementById('root'));
+
+// store.dispatch(actions.addMemo('Hello App'));
+//
+// store.dispatch(actions.editMemo(1, 'Editted'));
+//
+// store.dispatch(actions.deleteMemo(2));
+//
