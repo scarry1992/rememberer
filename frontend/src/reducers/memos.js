@@ -12,7 +12,6 @@ const memosIds = (state = [], action) => {
         case types.DELETE_MEMO: {
             return state.filter(id => id !== action.payload.id)
         }
-        case types.EDIT_MEMO:
         default: {
             return state;
         }
@@ -44,6 +43,17 @@ const memosById = (state = {}, action) => {
         }
         case types.DELETE_MEMO: {
             return omit(state, action.payload.id)
+        }
+        case types.TOGGLE_TYPE: {
+            return Object.assign({}, state, {
+                [action.payload.id]: {
+                    create: state[action.payload.id].create,
+                    text: state[action.payload.id].text,
+                    complete: state[action.payload.id].complete ?
+                        false:
+                        Date.now()
+                }
+            })
         }
         default: {
             return state;

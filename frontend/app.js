@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import shownTypes from './src/constants/ShownTypes';
 import  { createStore } from 'redux';
 import { reducer } from './src/reducers'
-import { MemosListApp } from './src/containers/MemosListApp'
+import MemoListApp from './src/containers/MemoListApp'
 import { Provider } from 'react-redux'
 //import ShownTypeActions from './src/actions/shownTypeActions'
 
@@ -39,7 +39,7 @@ class App extends Component {
         return (
             <div>
                 <Provider store={store}>
-                    <MemosListApp/>
+                    <MemoListApp/>
                 </Provider>
             </div>
         );

@@ -15,4 +15,11 @@ const deleteMemo = (id) => ({
     payload: {id: id}
 });
 
-export default {addMemo, editMemo, deleteMemo}
+const toggleType = (id) => ({
+    type: types.TOGGLE_TYPE,
+    payload: {
+        id: id
+    }
+});
+
+export default {addMemo, editMemo, deleteMemo, toggleType}
