@@ -9,20 +9,38 @@ import { Provider } from 'react-redux'
 
 const initialState = {
     shownType: shownTypes.NOT_COMPLETED,
+    isFetching: false,
+    serverInfo: {
+        didInvalidate: false,
+        lastTimeUpdate: 1490105220671
+    },
     memos: {
         memosIds: [1,2],
         memosById: {
             1: {
+                id:1,
                 create: Date.now(),
                 text: 'Get money!',
                 complete: false
             },
             2: {
+                id:2,
                 create: Date.now(),
                 text: 'Get money!',
                 complete: Date.now() + 10000
             }
         }
+    },
+    users: {
+        usersById: {
+            1: {
+                id: 1,
+                nickname: 'Scarry',
+                firstName: 'Sergei',
+                surName: 'Buntsevich'
+            }
+        },
+        usersIds: [1]
     }
 };
 

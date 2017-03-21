@@ -1,0 +1,1 @@
+export const FETCH_SERVER_INFO = 'FETCH_SERVER_INFO';

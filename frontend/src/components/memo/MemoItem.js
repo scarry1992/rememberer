@@ -12,6 +12,7 @@ export default class MemoItem extends Component {
     static get propTypes() {
         return {
             memo: PropTypes.shape({
+                id: PropTypes.number.isRequired,
                 create: PropTypes.number.isRequired,
                 text: PropTypes.string.isRequired,
                 complete: PropTypes.oneOfType([
@@ -23,7 +24,7 @@ export default class MemoItem extends Component {
     }
 
     deleteHandler(e) {
-        this.props.actions.deleteMemo(this.props.id)
+        this.props.actions.deleteMemo(this.props.memo.id)
     }
 
     editClickHandler(e) {
@@ -39,21 +40,21 @@ export default class MemoItem extends Component {
     }
 
     saveTextMemoHandler() {
-        this.props.actions.editMemo(this.props.id, this.state.text);
+        this.props.actions.editMemo(this.props.memo.id, this.state.text);
         this.setState({
             edit: false
         });
     }
 
     toggleTypeHandler() {
-        this.props.actions.toggleType(this.props.id);
+        this.props.actions.toggleType(this.props.memo.id);
     }
 
     render() {
-        const { create, text, complete } = this.props.memo;
+        const { create, text, complete, id } = this.props.memo;
 
         return (
-            <div>
+            <div data-id={id}>
                 <p>{new Date(create).toLocaleDateString()}</p>
                 {
                     this.state.edit?

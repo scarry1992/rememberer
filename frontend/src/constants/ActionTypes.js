@@ -1,7 +1,14 @@
-const ADD_MEMO = 'ADD_MEMO',
-    EDIT_MEMO = 'EDIT_MEMO',
-    DELETE_MEMO = 'DELETE_MEMO',
-    TOGGLE_TYPE = 'TOGGLE_TYPE',
-    CHANGE_SHOWN_TYPE = 'CHANGE_SHOWN_TYPE';
+import * as fetchActionTypes from './fetchActionTypes'
+import * as memosActionTypes from './memosActionTypes'
+import * as serverInfoActionTypes from './serverInfoActionTypes'
+import * as shownTypeActionTypes from './shownTypeActionTypes'
+import * as userActionTypes from './userActionTypes'
 
-export default {ADD_MEMO, EDIT_MEMO, DELETE_MEMO,TOGGLE_TYPE, CHANGE_SHOWN_TYPE}
+export default Object.assign(
+    {},
+    fetchActionTypes,
+    memosActionTypes,
+    serverInfoActionTypes,
+    shownTypeActionTypes,
+    userActionTypes
+)

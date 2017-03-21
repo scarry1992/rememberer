@@ -41,7 +41,7 @@ export default class MemoList extends Component {
         return (
             <div>
                 {
-                    map(this.props.memos, (memo, index) => <MemoItem key={index} id={index} memo={memo} actions={this.props.actions}/>)
+                    map(this.props.memos, (memo, index) => <MemoItem key={index} memo={memo} actions={this.props.actions}/>)
                 }
 
                 <button onClick={this.createClickHandler.bind(this)}>Create</button>

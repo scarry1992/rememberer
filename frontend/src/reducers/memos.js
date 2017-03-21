@@ -26,6 +26,7 @@ const memosById = (state = {}, action) => {
 
             return Object.assign({}, state, {
                 [newId]: {
+                    id: newId,
                     create: Date.now(),
                     text: action.payload.text,
                     complete: false
@@ -35,6 +36,7 @@ const memosById = (state = {}, action) => {
         case types.EDIT_MEMO: {
             return Object.assign({}, state, {
                 [action.payload.id]: {
+                    id: state[action.payload.id].id,
                     create: Date.now(),
                     text: action.payload.text,
                     complete: state[action.payload.id].complete
@@ -47,6 +49,7 @@ const memosById = (state = {}, action) => {
         case types.TOGGLE_TYPE: {
             return Object.assign({}, state, {
                 [action.payload.id]: {
+                    id: state[action.payload.id].id,
                     create: state[action.payload.id].create,
                     text: state[action.payload.id].text,
                     complete: state[action.payload.id].complete ?
