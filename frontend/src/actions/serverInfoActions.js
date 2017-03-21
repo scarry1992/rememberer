@@ -1,19 +1,19 @@
 import types from '../constants/ActionTypes'
 import * as fetchActions from './fetchActions'
 
-/*todo Придумать как использовать для всего общие генераторы экшенов фетча*/
-
-const fetchServerInfo = (userId = 0) => {
+function fetchServerInfo (userId = 0) {
     return (dispatch) => {
         if (!userId) {
-            return dispatch(fetchActions.fetchError(true, new Error('Invalid user ID')));
+            return dispatch(fetchActions.fetchError('serverInfo', true, new Error('Invalid user ID')));
         }
 
-        dispatch(fetchActions.fetchRequest(true));
+        dispatch(fetchActions.fetchRequest('serverInfo', true));
 
         return fetch('/assets/serverInfo.json').
             then(responce => responce.json()).
-            then(json => dispatch(fetchActions.fetchSuccess(false, json))).
-            catch(err => dispatch(fetchActions.fetchError(false, err)))
+            then(json => dispatch(fetchActions.fetchSuccess('serverInfo', false, json))).
+            catch(err => dispatch(fetchActions.fetchError('serverInfo', false, err)))
     }
-};
+}
+
+export { fetchServerInfo }

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import shownTypes from './src/constants/ShownTypes';
-import  { createStore } from 'redux';
+import  { createStore, compose, applyMiddleware } from 'redux';
 import { reducer } from './src/reducers'
 import MemoListApp from './src/containers/MemoListApp'
 import { Provider } from 'react-redux'
-//import ShownTypeActions from './src/actions/shownTypeActions'
+import * as actions from './src/actions'
+import './testData/serverInfo.json'
+import thunkMiddleware from 'redux-thunk'
 
 const initialState = {
     shownType: shownTypes.NOT_COMPLETED,
@@ -44,10 +46,12 @@ const initialState = {
     }
 };
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
     reducer,
     initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeEnhancers(applyMiddleware(thunkMiddleware))
 );
 
 //store.dispatch(ShownTypeActions.changeShownType(shownTypes.COMPLETED));
@@ -73,3 +77,4 @@ ReactDOM.render(<App/>, document.getElementById('root'));
 //
 // store.dispatch(actions.deleteMemo(2));
 //
+store.dispatch(actions.serverInfoActions.fetchServerInfo(1));

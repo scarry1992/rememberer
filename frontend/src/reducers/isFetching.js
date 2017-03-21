@@ -3,19 +3,15 @@ import types from '../constants/ActionTypes'
 const isFetching = (state = false, action) => {
     switch (action.type) {
         case types.FETCH_REQUEST: {
-            return {
-                isFetching: action.isFetching
-            }
+            return action.payload.isFetching;
         }
         case types.FETCH_SUCCESS: {
-            return {
-                isFetching: action.isFetching
-            }
+            return action.payload.isFetching;
         }
         case types.FETCH_ERROR: {
-            return {
-                isFetching: action.isFetching
-            }
+            console.log(action.error.message);
+
+            return action.payload.isFetching;
         }
         default: {
             return state
