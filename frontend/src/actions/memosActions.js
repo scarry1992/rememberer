@@ -1,4 +1,4 @@
-import types from '../constants/ActionTypes';
+import types from '../constants/ActionTypes'
 
 const addMemo = (text) => ({
     type: types.ADD_MEMO,
@@ -22,4 +22,46 @@ const toggleType = (id) => ({
     }
 });
 
-export default {addMemo, editMemo, deleteMemo, toggleType}
+const requestMemos = (userId, isFetch) => ({
+    type: types.REQUEST_MEMOS,
+    payload: {
+        userId,
+        isFetch
+    }
+});
+
+const receiveMemos = (isFetch, memos) => ({
+    type: types.RECEIVE_MEMOS,
+    payload: {
+        isFetch,
+        memos
+    }
+});
+
+const receiveErrorMemos = (isFetch, error) => ({
+    type: types.RECEIVE_MEMOS,
+    payload: {
+        isFetch,
+        error
+    }
+});
+
+const invalidateMemos = (invalidate) => ({
+    type:types.INVALIDATE_MEMOS,
+    payload: {invalidate}
+});
+
+const fetchMemos = (userId = 0) => (dispatch) => {
+    if (!userId) {
+        return dispatch(receiveErrorMemos(false, new Error('Invalid User ID')));
+    }
+
+    dispatch(requestMemos(userId, true));
+
+    return fetch('/assets/memos.json').
+        then(resp => resp.json()).
+        then(json => dispatch(receiveMemos(false, json))).
+        catch(err => dispatch(receiveErrorMemos(false, err)));
+};
+
+export default {addMemo, editMemo, deleteMemo, toggleType, invalidateMemos, fetchMemos}

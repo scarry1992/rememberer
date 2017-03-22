@@ -1,24 +1,9 @@
-import types from '../constants/ActionTypes';
+import types from '../../../constants/ActionTypes';
 import omit from 'lodash/omit';
 import { combineReducers } from 'redux'
+//import {fetchSuccessHelper} from '../helpers/fetchSuccessHelper'
 
-const memosIds = (state = [], action) => {
-    switch (action.type) {
-        case types.ADD_MEMO: {
-            let newId = state[state.length - 1] + 1;
-
-            return [...state, newId]
-        }
-        case types.DELETE_MEMO: {
-            return state.filter(id => id !== action.payload.id)
-        }
-        default: {
-            return state;
-        }
-    }
-};
-
-const memosById = (state = {}, action) => {
+export const memos = (state = {}, action) => {
     switch (action.type) {
         case types.ADD_MEMO: {
             let keys = Object.keys(state),
@@ -29,7 +14,8 @@ const memosById = (state = {}, action) => {
                     id: newId,
                     create: Date.now(),
                     text: action.payload.text,
-                    complete: false
+                    complete: false,
+                    //userId:
                 }
             })
         }
@@ -58,13 +44,15 @@ const memosById = (state = {}, action) => {
                 }
             })
         }
+        case types.RECEIVE_MEMOS: {
+            return fetchSuccessHelper(state, action);////
+        }
+        case types.RECEIVE_ERROR_MEMOS: {
+            console.log(action.payload.error.message);
+            return state;
+        }
         default: {
             return state;
         }
     }
 };
-
-export const memos = combineReducers({
-    memosIds,
-    memosById
-});

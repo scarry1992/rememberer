@@ -1,14 +1,10 @@
-import * as fetchActionTypes from './fetchActionTypes'
-import * as memosActionTypes from './memosActionTypes'
-import * as serverInfoActionTypes from './serverInfoActionTypes'
-import * as shownTypeActionTypes from './shownTypeActionTypes'
-import * as userActionTypes from './userActionTypes'
+import * as MemosActionTypes from './MemosActionTypes'
+import * as ShownTypeActionTypes from './ShownTypeActionTypes'
+import * as UserActionTypes from './UserActionTypes'
 
 export default Object.assign(
     {},
-    fetchActionTypes,
-    memosActionTypes,
-    serverInfoActionTypes,
-    shownTypeActionTypes,
-    userActionTypes
+    MemosActionTypes,
+    ShownTypeActionTypes,
+    UserActionTypes
 )

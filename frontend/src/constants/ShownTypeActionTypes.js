@@ -1,0 +1,1 @@
+export const CHANGE_SHOWN_TYPE = 'CHANGE_SHOWN_TYPE';

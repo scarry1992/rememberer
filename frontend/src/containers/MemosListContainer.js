@@ -41,7 +41,8 @@ function getVisibleMemosHelper(memos, shownType) {
 }
 
 const mapStateToProps = (state) => ({
-    memos: getVisibleMemosHelper(state.memos.memosById, state.shownType)
+    //memos: getVisibleMemosHelper(state.entities.memos, state.shownType)
+    memos: state.entities.memos
 });
 
 const mapDispatchToProps = (dispatch) => ({
