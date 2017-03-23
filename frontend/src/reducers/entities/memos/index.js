@@ -1,7 +1,7 @@
 import types from '../../../constants/ActionTypes';
 import omit from 'lodash/omit';
-import { combineReducers } from 'redux'
-//import {fetchSuccessHelper} from '../helpers/fetchSuccessHelper'
+import pickBy from 'lodash/pickBy'
+import merge from 'lodash/merge'
 
 export const memos = (state = {}, action) => {
     switch (action.type) {
@@ -14,18 +14,15 @@ export const memos = (state = {}, action) => {
                     id: newId,
                     create: Date.now(),
                     text: action.payload.text,
-                    complete: false,
-                    //userId:
+                    complete: false
                 }
             })
         }
         case types.EDIT_MEMO: {
-            return Object.assign({}, state, {
+            return merge({}, state, {
                 [action.payload.id]: {
-                    id: state[action.payload.id].id,
-                    create: Date.now(),
-                    text: action.payload.text,
-                    complete: state[action.payload.id].complete
+                    modify: Date.now(),
+                    text: action.payload.text
                 }
             })
         }
@@ -34,21 +31,29 @@ export const memos = (state = {}, action) => {
         }
         case types.TOGGLE_TYPE: {
             return Object.assign({}, state, {
-                [action.payload.id]: {
-                    id: state[action.payload.id].id,
-                    create: state[action.payload.id].create,
-                    text: state[action.payload.id].text,
-                    complete: state[action.payload.id].complete ?
-                        false:
-                        Date.now()
-                }
+                [action.payload.id]: Object.assign({}, state[action.payload.id], {
+                    modify: Date.now(),
+                    complete: state[action.payload.id].complete?false:Date.now()
+                })
             })
         }
         case types.RECEIVE_MEMOS: {
-            return fetchSuccessHelper(state, action);////
+            const isNewer = (memo, key) => {
+                let isExistClientMemo = !!state[key],
+                    modifyTimeClient = isExistClientMemo?state[key].modify:false,
+                    modifyTimeServer = memo.modify,
+                    isNewerMemo = !isExistClientMemo ||
+                        ((!!modifyTimeClient && !!modifyTimeServer && +modifyTimeServer > +modifyTimeClient) ||
+                        (!!modifyTimeServer && !modifyTimeClient));
+
+                return isNewerMemo;
+            };
+
+            return Object.assign({}, state, pickBy(action.payload.memos, isNewer));
         }
         case types.RECEIVE_ERROR_MEMOS: {
             console.log(action.payload.error.message);
+
             return state;
         }
         default: {

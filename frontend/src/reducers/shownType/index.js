@@ -1,5 +1,5 @@
-import types from '../constants/ActionTypes'
-import shownTypes from '../constants/ShownTypes'
+import types from '../../constants/ActionTypes'
+import shownTypes from '../../constants/ShownTypes'
 
 export const shownType = (state = shownTypes.NOT_COMPLETED, action) => {
     switch (action.type) {

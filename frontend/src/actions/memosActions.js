@@ -22,33 +22,32 @@ const toggleType = (id) => ({
     }
 });
 
-const requestMemos = (userId, isFetch) => ({
+const requestMemos = (userId, isFetching) => ({
     type: types.REQUEST_MEMOS,
     payload: {
         userId,
-        isFetch
+        isFetching
     }
 });
 
-const receiveMemos = (isFetch, memos) => ({
+const receiveMemos = (isFetching, memos) => ({
     type: types.RECEIVE_MEMOS,
     payload: {
-        isFetch,
+        isFetching,
         memos
     }
 });
 
-const receiveErrorMemos = (isFetch, error) => ({
-    type: types.RECEIVE_MEMOS,
+const receiveErrorMemos = (isFetching, error) => ({
+    type: types.RECEIVE_ERROR_MEMOS,
     payload: {
-        isFetch,
+        isFetching,
         error
     }
 });
 
-const invalidateMemos = (invalidate) => ({
-    type:types.INVALIDATE_MEMOS,
-    payload: {invalidate}
+const toggleValidateMemos = () => ({
+    type:types.TOGGLE_VALIDATE_MEMOS
 });
 
 const fetchMemos = (userId = 0) => (dispatch) => {
@@ -64,4 +63,4 @@ const fetchMemos = (userId = 0) => (dispatch) => {
         catch(err => dispatch(receiveErrorMemos(false, err)));
 };
 
-export default {addMemo, editMemo, deleteMemo, toggleType, invalidateMemos, fetchMemos}
+export default {addMemo, editMemo, deleteMemo, toggleType, toggleValidateMemos, fetchMemos}

@@ -1,10 +1,33 @@
-import * as MemosActionTypes from './MemosActionTypes'
-import * as ShownTypeActionTypes from './ShownTypeActionTypes'
-import * as UserActionTypes from './UserActionTypes'
+import {
+    ADD_MEMO,
+    EDIT_MEMO,
+    DELETE_MEMO,
+    TOGGLE_TYPE,
+    REQUEST_MEMOS,
+    RECEIVE_MEMOS,
+    RECEIVE_ERROR_MEMOS,
+    TOGGLE_VALIDATE_MEMOS
+} from './MemosActionTypes'
+import { CHANGE_SHOWN_TYPE } from './ShownTypeActionTypes'
+import {
+    ADD_USER,
+    EDIT_USER,
+    DELETE_USER,
+    TOGGLE_ACTIVE_USER
+} from './UserActionTypes'
 
-export default Object.assign(
-    {},
-    MemosActionTypes,
-    ShownTypeActionTypes,
-    UserActionTypes
-)
+export default {
+    ADD_MEMO,
+    EDIT_MEMO,
+    DELETE_MEMO,
+    TOGGLE_TYPE,
+    REQUEST_MEMOS,
+    RECEIVE_MEMOS,
+    RECEIVE_ERROR_MEMOS,
+    TOGGLE_VALIDATE_MEMOS,
+    CHANGE_SHOWN_TYPE,
+    ADD_USER,
+    EDIT_USER,
+    DELETE_USER,
+    TOGGLE_ACTIVE_USER
+}

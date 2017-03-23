@@ -1,6 +1,5 @@
 import memosActions from './memosActions';
 import shownTypeActions from './shownTypeActions'
+import usersActions from './usersActions'
 
-//let ActionCreators = Object.assign({}, memosActions, shownTypeActions);
-
-export { memosActions, shownTypeActions } ;
+export { memosActions, shownTypeActions, usersActions } ;
