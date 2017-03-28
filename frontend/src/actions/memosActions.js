@@ -22,19 +22,19 @@ const toggleType = (id) => ({
     }
 });
 
-const requestMemos = (userId, isFetching) => ({
+const requestMemos = (isFetching) => ({
     type: types.REQUEST_MEMOS,
     payload: {
-        userId,
         isFetching
     }
 });
 
-const receiveMemos = (isFetching, memos) => ({
+const receiveMemos = (userId, isFetching, memos) => ({
     type: types.RECEIVE_MEMOS,
     payload: {
         isFetching,
-        memos
+        memos,
+        userId
     }
 });
 
@@ -55,11 +55,11 @@ const fetchMemos = (userId = 0) => (dispatch) => {
         return dispatch(receiveErrorMemos(false, new Error('Invalid User ID')));
     }
 
-    dispatch(requestMemos(userId, true));
+    dispatch(requestMemos(true));
 
     return fetch('/assets/memos.json').
         then(resp => resp.json()).
-        then(json => dispatch(receiveMemos(false, json))).
+        then(json => dispatch(receiveMemos(userId, false, json))).
         catch(err => dispatch(receiveErrorMemos(false, err)));
 };
 

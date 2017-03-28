@@ -1,5 +1,5 @@
-import types from '../../../constants/ActionTypes';
-import omit from 'lodash/omit';
+import types from '../../../constants/ActionTypes'
+import omit from 'lodash/omit'
 import pickBy from 'lodash/pickBy'
 import merge from 'lodash/merge'
 

@@ -13,7 +13,11 @@ import {
     ADD_USER,
     EDIT_USER,
     DELETE_USER,
-    TOGGLE_ACTIVE_USER
+    TOGGLE_ACTIVE_USER,
+    REQUEST_USER,
+    RECEIVE_USER,
+    RECEIVE_ERROR_USER,
+    TOGGLE_VALIDATE_USERS
 } from './UserActionTypes'
 
 export default {
@@ -29,5 +33,9 @@ export default {
     ADD_USER,
     EDIT_USER,
     DELETE_USER,
-    TOGGLE_ACTIVE_USER
+    TOGGLE_ACTIVE_USER,
+    REQUEST_USER,
+    RECEIVE_USER,
+    RECEIVE_ERROR_USER,
+    TOGGLE_VALIDATE_USERS
 }
