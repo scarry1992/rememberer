@@ -3,7 +3,7 @@ import omit from 'lodash/omit'
 import pickBy from 'lodash/pickBy'
 import merge from 'lodash/merge'
 
-export const memos = (state = {}, action) => {
+export const memos = (state = {}, action, owner) => {
     switch (action.type) {
         case types.ADD_MEMO: {
             let keys = Object.keys(state),
@@ -14,7 +14,8 @@ export const memos = (state = {}, action) => {
                     id: newId,
                     create: Date.now(),
                     text: action.payload.text,
-                    complete: false
+                    complete: false,
+                    owner
                 }
             })
         }

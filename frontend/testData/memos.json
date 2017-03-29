@@ -4,12 +4,14 @@
     "create": 1490103220671,
     "modify": 1490103290671,
     "text": "Async MEMO_1",
-    "complete": false
+    "complete": false,
+    "owner": 2
   },
   "7": {
     "id":7,
     "create": 1490105227671,
     "text": "Async MEMO_2",
-    "complete": 1490135220671
+    "complete": 1490135220671,
+    "owner": 1
   }
 }

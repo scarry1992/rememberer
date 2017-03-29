@@ -18,13 +18,15 @@ const initialState = {
                 id:1,
                 create: 1490103220671,
                 text: 'MemoTestNotComplited',
-                complete: false
+                complete: false,
+                owner: 1
             },
             2: {
                 id:2,
                 create: Date.now(),
                 text: 'MemoTestComplited',
-                complete: Date.now() + 10000
+                complete: Date.now() + 10000,
+                owner: 2
             }
         },
         users: {
@@ -79,22 +81,21 @@ ReactDOM.render(<App/>, document.getElementById('root'));
 // store.dispatch(actions.memosActions.deleteMemo(1));
 // store.dispatch(actions.memosActions.toggleType(2));
 // store.dispatch(actions.memosActions.toggleValidateMemos());
-//store.dispatch(actions.memosActions.fetchMemos(1));
+// store.dispatch(actions.memosActions.fetchMemos(1));
 
 /*todo Добавить в сущность мемо userId  и переработать под этот подход*/
 
-store.dispatch(actions.usersActions.addUser({
-    nickname: 'Bambi',
-    firstName: 'Oleg',
-    surName: 'Shelkov'
-
-}));
-store.dispatch(actions.usersActions.editUser(1, {
-    nickname: 'Scarrabey',
-    surName: 'Serov'
-}));
-store.dispatch(actions.usersActions.deleteUser(2));
-store.dispatch(actions.usersActions.fetchUser(3));
-store.dispatch(actions.memosActions.fetchMemos(1));
-store.dispatch(actions.usersActions.toggleValidateUsers());
-store.dispatch(actions.usersActions.toggleActiveUser(1));
+// store.dispatch(actions.usersActions.addUser({
+//     nickname: 'Bambi',
+//     firstName: 'Oleg',
+//     surName: 'Shelkov'
+//
+// }));
+// store.dispatch(actions.usersActions.editUser(1, {
+//     nickname: 'Scarrabey',
+//     surName: 'Serov'
+// }));
+// store.dispatch(actions.usersActions.deleteUser(2));
+// store.dispatch(actions.usersActions.fetchUser(3));
+// store.dispatch(actions.usersActions.toggleValidateUsers());
+// store.dispatch(actions.usersActions.toggleActiveUser(1));

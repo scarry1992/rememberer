@@ -40,8 +40,12 @@ function getVisibleMemosHelper(memos, shownType) {
     }
 }
 
+const getMemosByUser = (memos, ownerId) => {
+    return pickBy(memos, memo => memo.owner == ownerId);
+};
+
 const mapStateToProps = (state) => ({
-    memos: getVisibleMemosHelper(state.entities.memos, state.shownType)
+    memos: getMemosByUser(getVisibleMemosHelper(state.entities.memos, state.shownType), state.usersById.activeUser)
     //memos: state.entities.memos
 });
 
