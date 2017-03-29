@@ -38,23 +38,40 @@ export const memos = (state = {}, action) => {
             })
         }
         case types.RECEIVE_MEMOS: {
-            const isNewer = (memo, key) => {
-                let isExistClientMemo = !!state[key],
-                    modifyTimeClient = isExistClientMemo?state[key].modify:false,
-                    modifyTimeServer = memo.modify,
-                    isNewerMemo = !isExistClientMemo ||
-                        ((!!modifyTimeClient && !!modifyTimeServer && +modifyTimeServer > +modifyTimeClient) ||
-                        (!!modifyTimeServer && !modifyTimeClient));
+            switch (action.subtype) {
+                case 'update': {
+                    const isNewer = (memo, key) => {
+                        let isExistClientMemo = !!state[key],
+                            modifyTimeClient = isExistClientMemo?state[key].modify:false,
+                            modifyTimeServer = memo.modify,
+                            isNewerMemo = !isExistClientMemo ||
+                                ((!!modifyTimeClient && !!modifyTimeServer && +modifyTimeServer > +modifyTimeClient) ||
+                                (!!modifyTimeServer && !modifyTimeClient));
 
-                return isNewerMemo;
-            };
+                        return isNewerMemo;
+                    };
 
-            return Object.assign({}, state, pickBy(action.payload.memos, isNewer));
+                    return Object.assign({}, state, pickBy(action.payload.memos, isNewer));
+                }
+                case 'change_user': {
+                    return action.payload.memos;
+                }
+                default: {
+                    return state;
+                }
+            }
         }
         case types.RECEIVE_ERROR_MEMOS: {
             console.log(action.payload.error.message);
 
             return state;
+        }
+        case types.CHANGE_USER: {
+            let memos = {};
+
+            action.payload.memosByUser.forEach(memo => {memos[memo.id] = memo});
+
+            return memos;
         }
         default: {
             return state;

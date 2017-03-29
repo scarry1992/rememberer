@@ -29,8 +29,9 @@ const requestMemos = (isFetching) => ({
     }
 });
 
-const receiveMemos = (userId, isFetching, memos) => ({
+const receiveMemos = (userId, isFetching, memos, subtype) => ({
     type: types.RECEIVE_MEMOS,
+    subtype,
     payload: {
         isFetching,
         memos,
@@ -50,7 +51,7 @@ const toggleValidateMemos = () => ({
     type:types.TOGGLE_VALIDATE_MEMOS
 });
 
-const fetchMemos = (userId = 0) => (dispatch) => {
+const fetchMemos = (userId = 0, subtype = 'update') => (dispatch) => {
     if (!userId) {
         return dispatch(receiveErrorMemos(false, new Error('Invalid User ID')));
     }
@@ -59,7 +60,7 @@ const fetchMemos = (userId = 0) => (dispatch) => {
 
     return fetch('/assets/memos.json').
         then(resp => resp.json()).
-        then(json => dispatch(receiveMemos(userId, false, json))).
+        then(json => dispatch(receiveMemos(userId, false, json, subtype))).
         catch(err => dispatch(receiveErrorMemos(false, err)));
 };
 

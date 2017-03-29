@@ -10,9 +10,8 @@ import {
 } from './MemosActionTypes'
 import { CHANGE_SHOWN_TYPE } from './ShownTypeActionTypes'
 import {
-    ADD_USER,
+    CHANGE_USER,
     EDIT_USER,
-    DELETE_USER,
     TOGGLE_ACTIVE_USER,
     REQUEST_USER,
     RECEIVE_USER,
@@ -30,10 +29,8 @@ export default {
     RECEIVE_ERROR_MEMOS,
     TOGGLE_VALIDATE_MEMOS,
     CHANGE_SHOWN_TYPE,
-    ADD_USER,
+    CHANGE_USER,
     EDIT_USER,
-    DELETE_USER,
-    TOGGLE_ACTIVE_USER,
     REQUEST_USER,
     RECEIVE_USER,
     RECEIVE_ERROR_USER,

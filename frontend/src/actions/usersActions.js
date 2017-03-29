@@ -1,31 +1,18 @@
 import types from '../constants/ActionTypes'
+import memosActions from './memosActions'
 
-const addUser = (data) => ({
-    type: types.ADD_USER,
-    payload: {
-        data
-    }
-});
+// const changeUser = (data) => ({
+//     type: types.CHANGE_USER,
+//     payload: {
+//         data
+//     }
+// });
 
 const editUser = (id, data) => ({
     type: types.EDIT_USER,
     payload: {
         id,
         data
-    }
-});
-
-const deleteUser = (id) => ({
-    type: types.DELETE_USER,
-    payload: {
-        id
-    }
-});
-
-const toggleActiveUser = (id) => ({
-    type: types.TOGGLE_ACTIVE_USER,
-    payload: {
-        id
     }
 });
 
@@ -56,8 +43,8 @@ const toggleValidateUsers = () => ({
     type:types.TOGGLE_VALIDATE_USERS
 });
 
-const fetchUser = (userId = 0) => (dispatch) => {
-    if (!userId) {
+const fetchUser = (data) => (dispatch) => {
+    if (!data) {
         return dispatch(receiveErrorUser(false, new Error('Invalid User ID')));
     }
 
@@ -69,12 +56,32 @@ const fetchUser = (userId = 0) => (dispatch) => {
     catch(err => dispatch(receiveErrorUser(false, err)));
 };
 
+const changeUser = data => dispatch => {
+    let memosByUser, user;
+
+    return dispatch(fetchUser(data)).then(userActionData => {
+        user = userActionData.payload.user;
+
+        return dispatch(memosActions.fetchMemos(userActionData.payload.user.id, 'change_user'))
+    }).then(memosActionData => {
+        memosByUser = memosActionData.payload.memos;
+
+        return {
+            type: types.CHANGE_USER,
+            payload: {
+                user,
+                memosByUser
+            }
+        }
+    }).catch(err => {
+        console.log(err.message);
+    });
+};
+
 
 export default {
-    addUser,
+    changeUser,
     editUser,
-    deleteUser,
-    toggleActiveUser,
     requestUser,
     receiveUser,
     receiveErrorUser,

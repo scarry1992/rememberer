@@ -15,7 +15,7 @@ export default class ShownTypeToggler extends Component {
 
     render() {
         return (
-            <select name="shownType" id="shownType" onChange={this.onChange.bind(this)}>
+            <select value={this.props.shownType} name="shownType" id="shownType" onChange={this.onChange.bind(this)}>
                 {map(ShownTypes, (type, index) => <option key={index} value={type}>{type}</option>)}
             </select>
         );

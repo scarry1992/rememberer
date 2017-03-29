@@ -23,12 +23,28 @@ export const memosById = (state = {}, action) => {
             })
         }
         case types.RECEIVE_MEMOS: {
-            let keys = Object.keys(action.payload.memos).map(key => +key);
+            switch (action.subtype) {
+                case 'update': {
+                    let keys = Object.keys(action.payload.memos).map(key => +key);
 
-            return Object.assign({}, state, {
-                isFetching: action.payload.isFetching,
-                memos: union(state.memos, keys).sort()
-            })
+                    return Object.assign({}, state, {
+                        isFetching: action.payload.isFetching,
+                        memos: union(state.memos, keys).sort()
+                    })
+                }
+                case 'change_user': {
+                    return Object.assign({}, state, {
+                        isFetching: action.payload.isFetching,
+                        memos: Object.keys(action.payload.memos).map(key => +key).sort()
+                    })
+                }
+                default: {
+                    return state;
+                }
+            }
+        }
+        case types.CHANGE_USER: {
+            return action.payload.memosByUser.map(memo => memo.id);
         }
         default: {
             return state;
