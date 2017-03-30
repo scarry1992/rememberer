@@ -23,10 +23,10 @@ module.exports = (__path) => {
                     exclude: 'node_modules'
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.css$/,
                     exclude: 'node_modules',
                     use: ExtractTextPlugin.extract({
-                        fallbackLoader: [{
+                        fallback: [{
                             loader: 'style-loader',
                         }],
                         use: [{
@@ -46,13 +46,11 @@ module.exports = (__path) => {
                                                     'last 3 version',
                                                     'ie >= 10',
                                                 ]
-                                            })
+                                            }),
+                                            require('postcss-nesting')
                                         ]
                                     }
                                 }
-                            },
-                            {
-                                loader: 'sass-loader'
                             }
                         ],
                     }),
