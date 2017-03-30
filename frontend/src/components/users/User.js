@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import style from './User.scss'
 
 export default class UserComponent extends Component {
     constructor(props) {
@@ -38,14 +39,15 @@ export default class UserComponent extends Component {
     }
 
     render() {
+        console.log(style);
         return (
-            <div>
+            <div className={style.auth}>
                 {
                     this.props.usersById.didInvalidate ?
                         (
                             <form onSubmit={(e) => this.loginHandler(e)}>
-                                <input type="text" value={this.state.login} onChange={(e) => this.changeLoginHandler(e)}/>
-                                <input type="password" value={this.state.password} onChange={(e) => this.changePasswordHandler(e)}/>
+                                <input placeholder="Nickname" type="text" value={this.state.login} onChange={(e) => this.changeLoginHandler(e)}/>
+                                <input placeholder="Password" type="password" value={this.state.password} onChange={(e) => this.changePasswordHandler(e)}/>
                                 <input type="submit"/>
                             </form>
                         ):

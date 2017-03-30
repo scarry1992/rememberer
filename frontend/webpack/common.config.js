@@ -1,6 +1,7 @@
 let webpack = require('webpack'),
     path = require('path'),
-    HtmlPlugin = require('html-webpack-plugin');
+    HtmlPlugin = require('html-webpack-plugin'),
+    ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (__path) => {
     return {
@@ -20,6 +21,36 @@ module.exports = (__path) => {
                     test: /\.js|jsx$/,
                     loader: 'babel-loader',
                     exclude: 'node_modules'
+                },
+                {
+                    test: /\.scss$/,
+                    exclude: 'node_modules',
+                    use: ExtractTextPlugin.extract({
+                        fallbackLoader: [{
+                            loader: 'style-loader',
+                        }],
+                        use: [{
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                localIdentName: '[name]__[local]--[hash:base64:5]',
+                            },
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    plugins: function () {
+                                        return [
+                                            require('autoprefixer')
+                                        ]
+                                    }
+                                }
+                            },
+                            {
+                                loader: 'sass-loader'
+                            }
+                        ],
+                    }),
                 }
             ]
         },
@@ -31,7 +62,8 @@ module.exports = (__path) => {
                 template: path.resolve(__path, 'frontend', 'index.template.html'),
                 inject: 'body',
                 title: 'Rememberer'
-            })
+            }),
+            new ExtractTextPlugin('assets/theme.css')
         ]
     }
 };
