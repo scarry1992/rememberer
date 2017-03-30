@@ -41,7 +41,12 @@ module.exports = (__path) => {
                                 options: {
                                     plugins: function () {
                                         return [
-                                            require('autoprefixer')
+                                            require('autoprefixer')({
+                                                browsers: [
+                                                    'last 3 version',
+                                                    'ie >= 10',
+                                                ]
+                                            })
                                         ]
                                     }
                                 }
