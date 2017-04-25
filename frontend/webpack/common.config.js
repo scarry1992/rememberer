@@ -20,11 +20,11 @@ module.exports = (__path) => {
                 {
                     test: /\.js|jsx$/,
                     loader: 'babel-loader',
-                    exclude: 'node_modules'
+                    exclude: /node_modules/
                 },
                 {
                     test: /\.css$/,
-                    exclude: 'node_modules',
+                    exclude: /node_modules/,
                     use: ExtractTextPlugin.extract({
                         fallback: [{
                             loader: 'style-loader',
