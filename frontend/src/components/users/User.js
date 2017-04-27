@@ -39,7 +39,6 @@ export default class UserComponent extends Component {
     }
 
     render() {
-        console.log(style);
         return (
             <div className={style.auth}>
                 {

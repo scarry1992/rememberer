@@ -6,7 +6,7 @@ let webpack = require('webpack'),
 module.exports = (__path, env) => {
     return {
         context: path.resolve(__path, 'frontend'),
-        entry: './app.js',
+        entry: ['./app.js'],
         output: {
             filename: 'assets/build.js',
             publicPath: '/',
@@ -17,11 +17,6 @@ module.exports = (__path, env) => {
         },
         module: {
             loaders: [
-                {
-                    test: /\.js$|jsx$/,
-                    loader: 'babel-loader',
-                    exclude: /node_modules/
-                },
                 {
                     test: /\.css$/,
                     exclude: /node_modules/,
