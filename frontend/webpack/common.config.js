@@ -3,7 +3,7 @@ let webpack = require('webpack'),
     HtmlPlugin = require('html-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = (__path) => {
+module.exports = (__path, env) => {
     return {
         context: path.resolve(__path, 'frontend'),
         entry: './app.js',
@@ -18,7 +18,7 @@ module.exports = (__path) => {
         module: {
             loaders: [
                 {
-                    test: /\.js|jsx$/,
+                    test: /\.js$|jsx$/,
                     loader: 'babel-loader',
                     exclude: /node_modules/
                 },
@@ -59,7 +59,7 @@ module.exports = (__path) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+                NODE_ENV: JSON.stringify(env)
             }),
             new HtmlPlugin({
                 template: path.resolve(__path, 'frontend', 'index.template.html'),

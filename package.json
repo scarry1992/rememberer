@@ -4,8 +4,8 @@
   "description": "Reminder",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --progress",
-    "prod": "NODE_ENV=production webpack --progress"
+    "dev": "webpack-dev-server --env=development --progress",
+    "prod": "webpack --progress --env=production"
   },
   "repository": {
     "type": "git",

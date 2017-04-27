@@ -14,4 +14,4 @@ const customizer = (objValue, srcValue) => {
     }
 };
 
-module.exports = _.mergeWith(_configs['common'](__dirname), _configs[process.env.NODE_ENV](__dirname), customizer);
+module.exports = (env) => _.mergeWith(_configs['common'](__dirname, env), _configs[env](__dirname), customizer);
