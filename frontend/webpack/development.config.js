@@ -1,4 +1,5 @@
-const webpack = require('webpack');
+const webpack = require('webpack'),
+    path = require('path');
 
 module.exports = (__path) => {
     return {
@@ -11,14 +12,16 @@ module.exports = (__path) => {
         module:{
             loaders: [
                 {
-                    test: /\.js$|jsx$/,
-                    use: ['babel-loader'],
-                    exclude: /node_modules/
-                },
-                {
                     test: /\.json$/,
-                    include: /frontend\/testData/,
-                    loader: 'file-loader?name=assets/[name].[ext]'
+                    include: /testData/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: 'assets/[name].[ext]'
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -28,7 +31,7 @@ module.exports = (__path) => {
         ],
         devServer: {
             hot: true,
-            //contentBase: resolve(__path, 'dist'),
+            contentBase: path.resolve(__path, 'public'),
             publicPath: '/'
         },
     }

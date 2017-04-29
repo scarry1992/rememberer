@@ -1,0 +1,39 @@
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.add {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(32, 34, 38, 0.8);
+  text-align: center;
+  &__inner {
+    position: relative;
+    top: calc(50% - 40vh);
+    display: inline-block;
+    & textarea {
+      font-size: 1.5em;
+      width: 50vw;
+      height: 40vh;
+      display: block;
+      margin-bottom: 5vh;
+      resize: none;
+    }
+    & button {
+      height: 5vh;
+      width: 50vw;
+    }
+  }
+}
+.btn-add {
+  position: absolute;
+  top: 1vh;
+  left: 10px;
+  font-size: 2em;
+  padding: 10px 20px;
+  border-radius: 50%;
+}

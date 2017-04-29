@@ -1,0 +1,41 @@
+@import "../variables.pcss";
+
+.auth {
+    position: relative;
+    & form {
+        padding-top: 10%;
+        & input {
+            display: block;
+            margin: 0 auto 5vh;
+            width: 30%;
+            font-size: 2em;
+            line-height: 2em;
+            padding: 0 15px;
+            &[type=submit] {
+                height: 8vh;
+                border-radius: 20px;
+            }
+        }
+    }
+}
+.login {
+    position: relative;
+    height: 8vh;
+    border-bottom: 2px solid #ccc;
+    background-color: var(--main);
+    &__inner {
+        position: relative;
+        float: right;
+        height: 100%;
+        margin-right: 10px;
+        &__name {
+            font-size: 23px;
+        }
+        &__exit {
+            display: block;
+            width: 100%;
+            position: relative;
+            bottom: -15px;
+        }
+    }
+}

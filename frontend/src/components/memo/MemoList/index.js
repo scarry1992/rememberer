@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import MemoItem from './MemoItem'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import MemoItem from '../MemoItem'
 import map from 'lodash/map'
+import style from './MemoList.pcss'
 
 export default class MemoList extends Component {
     constructor(props) {
@@ -29,7 +31,7 @@ export default class MemoList extends Component {
         });
     }
 
-    saveHandler(e) {
+    saveHandler() {
         this.props.actions.addMemo(this.state.text);
         this.setState({
             create: false,
@@ -39,14 +41,21 @@ export default class MemoList extends Component {
 
     render() {
         return (
-            <div>
+            <div className={style.list}>
                 {
                     map(this.props.memos, (memo, index) => <MemoItem key={index} memo={memo} actions={this.props.actions}/>)
                 }
 
-                <button onClick={this.createClickHandler.bind(this)}>Create</button>
-                {this.state.create? <input onChange={this.changeTextHandler.bind(this)} type="text" value={this.state.text}/>: ''}
-                {this.state.create?<button onClick={this.saveHandler.bind(this)}>Save</button>:''}
+                <button className={style['btn-add']} onClick={this.createClickHandler.bind(this)}>+</button>
+                {this.state.create? (
+                    <div className={style.add}>
+                        <div className={style.add__inner}>
+                            <textarea onChange={this.changeTextHandler.bind(this)} type="text" value={this.state.text}/>
+                            <button onClick={this.saveHandler.bind(this)}>OK</button>
+                        </div>
+                    </div>
+                ):
+                    undefined}
             </div>
         );
     }

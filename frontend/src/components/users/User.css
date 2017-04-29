@@ -1,9 +1,0 @@
-.auth {
-    position: relative;
-    //right: 20px;
-    //top: 20px;
-    & input {
-        display: block;
-        margin-bottom: 5px;
-    }
-}

@@ -18,7 +18,12 @@ module.exports = (__path, env) => {
         module: {
             loaders: [
                 {
-                    test: /\.css$/,
+                    test: /\.js$|jsx$/,
+                    use: ['babel-loader'],
+                    exclude: /node_modules/
+                },
+                {
+                    test: /\.p?css$/,
                     exclude: /node_modules/,
                     use: ExtractTextPlugin.extract({
                         fallback: [{
@@ -34,17 +39,7 @@ module.exports = (__path, env) => {
                             {
                                 loader: 'postcss-loader',
                                 options: {
-                                    plugins: function () {
-                                        return [
-                                            require('autoprefixer')({
-                                                browsers: [
-                                                    'last 3 version',
-                                                    'ie >= 10',
-                                                ]
-                                            }),
-                                            require('postcss-nesting')
-                                        ]
-                                    }
+                                    plugins: require(__path+'/postcss.config.js')
                                 }
                             }
                         ],

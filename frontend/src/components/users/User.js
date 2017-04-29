@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import style from './User.css'
+import React, { Component } from 'react'
+//import PropTypes from 'prop-types'
+import style from './User.pcss'
 
 export default class UserComponent extends Component {
     constructor(props) {
@@ -34,27 +35,29 @@ export default class UserComponent extends Component {
         });
     }
 
-    logoutHandler(e) {
+    logoutHandler() {
         this.props.actions.toggleValidateUsers();
     }
 
     render() {
+        const didInvalidate = this.props.usersById.didInvalidate;
+
         return (
-            <div className={style.auth}>
+            <div className={didInvalidate ? style.auth : style.login}>
                 {
-                    this.props.usersById.didInvalidate ?
+                    didInvalidate ?
                         (
                             <form onSubmit={(e) => this.loginHandler(e)}>
                                 <input placeholder="Nickname" type="text" value={this.state.login} onChange={(e) => this.changeLoginHandler(e)}/>
                                 <input placeholder="Password" type="password" value={this.state.password} onChange={(e) => this.changePasswordHandler(e)}/>
-                                <input type="submit"/>
+                                <input type="submit" value='Войти'/>
                             </form>
                         ):
                         (
-                            <span>
-                                {`${this.props.user.nickname} - ${this.props.user.firstName}`}
-                                <input type="button" value="Exit" onClick={(e) => this.logoutHandler(e)}/>
-                            </span>
+                            <div className={style.login__inner}>
+                                <span className={style.login__inner__name}>{`${this.props.user.nickname} - ${this.props.user.firstName}`}</span>
+                                <input className={style.login__inner__exit} type="button" value="Exit" onClick={(e) => this.logoutHandler(e)}/>
+                            </div>
                         )
                 }
             </div>

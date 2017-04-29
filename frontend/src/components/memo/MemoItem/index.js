@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import style from './MemoItem.pcss'
 
 export default class MemoItem extends Component {
     constructor(props) {
@@ -23,11 +25,11 @@ export default class MemoItem extends Component {
         }
     }
 
-    deleteHandler(e) {
+    deleteHandler() {
         this.props.actions.deleteMemo(this.props.memo.id)
     }
 
-    editClickHandler(e) {
+    editClickHandler() {
         this.setState({
             edit: true
         });
@@ -54,18 +56,19 @@ export default class MemoItem extends Component {
         const { create, text, complete, id } = this.props.memo;
 
         return (
-            <div data-id={id}>
-                <p>{new Date(create).toLocaleDateString()}</p>
+            <div className={style.item} data-id={id}>
+                <span className={style.item__create}>{new Date(create).toLocaleDateString()}</span>
+                {complete ? <span className={style.item__complite}> - {new Date(complete).toLocaleDateString()}</span> : undefined}
+                <button className={style.item__toggle} onClick={this.toggleTypeHandler.bind(this)}>{complete ? 'redo': 'done'}</button>
+                <button className={style.item__delete} onClick={this.deleteHandler.bind(this)}>x</button>
                 {
                     this.state.edit?
-                        <input  onBlur={this.saveTextMemoHandler.bind(this)}
+                        <textarea  className={style.item__edit}
+                                onBlur={this.saveTextMemoHandler.bind(this)}
                                 onChange={this.editTextMemoHandler.bind(this)}
                                 type="text" value={this.state.text}/>:
-                        <p onClick={this.editClickHandler.bind(this)}>{text}</p>
+                        <sapn className={style.item__text} onClick={this.editClickHandler.bind(this)}>{text}</sapn>
                 }
-                <p>{complete ? new Date(complete).toLocaleDateString(): ""}</p>
-                <button onClick={this.deleteHandler.bind(this)}>Delete</button>
-                <button onClick={this.toggleTypeHandler.bind(this)}>Toggle</button>
             </div>
         );
     }
