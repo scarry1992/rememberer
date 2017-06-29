@@ -4,7 +4,7 @@
   "description": "Reminder",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --env=development --progress",
+    "dev": "webpack-dev-server --host 0.0.0.0 --env=development --progress",
     "test": "mocha ./frontend/test/**/*-test.js --compilers js:babel-core/register",
     "prod": "webpack --progress --env=production"
   },
