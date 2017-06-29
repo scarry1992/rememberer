@@ -13,13 +13,15 @@ describe('memos reducer', () => {
         },
         2: {
             id:2,
-                create: Date.now(),
+                create: 1490103250671,
                 text: 'MemoTestComplited',
-                complete: Date.now() + 10000
+                complete: 1490103820671
         }
     };
 
-    it('Add MEMO', () => {
-        expect(memos(initialState, MemosActions.addMemo('Test'))[3].text).to.equal('Test');
-    });
+    // it('Add MEMO', () => {
+    //     expect(memos(initialState, MemosActions.addMemo('Test'))).to.eql(Object.assign({}, initialState, {
+    //         3: {}
+    //     }));
+    // });
 });

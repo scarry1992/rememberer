@@ -1,0 +1,8 @@
+web:
+  image: scarry92/rememberer
+  #build: .
+  ports:
+    - "8080:8080"
+  volumes:
+    - c:/dev/projects/rememberer:/usr/src/rememberer
+  entrypoint: npm run dev

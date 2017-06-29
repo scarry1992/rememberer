@@ -1,4 +1,5 @@
 import types from '../constants/ActionTypes'
+import "isomorphic-fetch"
 
 const addMemo = (text) => ({
     type: types.ADD_MEMO,
